@@ -11,8 +11,8 @@ public class NewsParcer {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		PrintWriter out = new PrintWriter(System.out);
-		ILoadNews e1Load = new e1Loader();
-		News[] NewsE1 = e1Load.LoadNews();
+		ILoadNews LNe1 = new e1Loader();
+		News[] NewsE1 = LNe1.LoadNews();
 		if(NewsE1!=null){
 			for(int i=0; i<NewsE1.length; i++){
 				out.println(NewsE1[i].getTitle());
