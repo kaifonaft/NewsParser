@@ -1,4 +1,4 @@
-import java.sql.Date;
+import java.util.Date;
 
 import sun.util.resources.CalendarData;
 
@@ -21,31 +21,31 @@ public class News {
 	int getId(){
 		return id;
 	}
-	String getTitle(){
+	public String getTitle(){
 		return title;
 	}
-	String getAnounce(){
+	public String getAnounce(){
 		return anounce;
 	}
-	String getFulltext(){
+	public String getFulltext(){
 		return fulltext;
 	}
-	Date getDate(){
+	public Date getDate(){
 		return date;
 	}
-	void setId(int id){
+	public void setId(int id){
 		this.id = id;
 	}
-	void setTitle(String title){
+	public void setTitle(String title){
 		this.title = title;
 	}
-	void setAnounce(String anounce){
+	public void setAnounce(String anounce){
 		this.anounce = anounce;
 	}
-	void setFulltext(String fulltext){
+	public void setFulltext(String fulltext){
 		this.fulltext = fulltext;
 	}
-	void setDate(Date date){
+	public void setDate(Date date){
 		this.date = date;
 	}
 	

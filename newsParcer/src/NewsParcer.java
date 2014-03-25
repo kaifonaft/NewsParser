@@ -1,5 +1,5 @@
 import java.io.PrintWriter;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -15,7 +15,10 @@ public class NewsParcer {
 		News[] NewsE1 = LNe1.LoadNews();
 		if(NewsE1!=null){
 			for(int i=0; i<NewsE1.length; i++){
-				out.println(NewsE1[i].getTitle());
+				out.println("title: "+NewsE1[i].getTitle());
+				out.println("anounce: "+NewsE1[i].getAnounce());
+				out.println("date: "+NewsE1[i].getDate());
+				out.println();
 			}
 			BaseNews BN = new BaseNews();
 		}

@@ -19,6 +19,9 @@ import org.w3c.dom.Element;
 //import com.sun.org.apache.xerces.internal.util.HTTPInputSource;
 
 
+
+import sun.net.www.http.HttpClient;
+
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -63,9 +66,11 @@ public class e1Loader implements ILoadNews{
 			Document Doc;
 			Doc = xmlBulder.parse(xmlFile);
 			NodeList Items = Doc.getElementsByTagName("item");
+//			HttpClient HC = new HttpClient();
 			for(int i=0; i<5; i++){
 				NodeList NL = Items.item(i).getChildNodes();
 				News NewsOne = new News();
+				String ref;
 				for(int j=0; j<NL.getLength(); j++){
 					Node Item = NL.item(j);
 					String type = Item.getNodeName();
@@ -74,8 +79,9 @@ public class e1Loader implements ILoadNews{
 					}else if(type == "description"){
 						NewsOne.setAnounce(Item.getTextContent());
 					}else if(type =="pubDate"){
-//						Date d = new Date(Item.getTextContent());
-//						NewsOne.setDate(d);
+						NewsOne.setDate(new Date(Item.getTextContent()));
+					}else if(type=="link"){
+						ref = Item.getTextContent();
 					}/*
 					out.print("NodeName: ");
 					out.println(NL.item(j).getNodeName());
@@ -85,6 +91,7 @@ public class e1Loader implements ILoadNews{
 					out.println(NL.item(j).getTextContent());
 					*/
 				}
+				
 				Result[i] = NewsOne;
 			}
 			out.flush();
