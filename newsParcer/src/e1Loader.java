@@ -66,7 +66,7 @@ public class e1Loader implements ILoadNews{
 			Document Doc;
 			Doc = xmlBulder.parse(xmlFile);
 			NodeList Items = Doc.getElementsByTagName("item");
-//			HttpClient HC = new HttpClient();
+//			HttpClient HC = new HttpClient(); 
 			for(int i=0; i<5; i++){
 				NodeList NL = Items.item(i).getChildNodes();
 				News NewsOne = new News();
