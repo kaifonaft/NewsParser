@@ -15,10 +15,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Element;
-
-//import com.sun.org.apache.xerces.internal.util.HTTPInputSource;
-
-
+import org.apache.http.client.*;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 
 import sun.net.www.http.HttpClient;
 
@@ -40,7 +39,7 @@ public class e1Loader implements ILoadNews{
 			con.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 5.1; rv:27.0) Gecko/20100101 Firefox/27.0");
 			con.setRequestProperty("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
 			con.setRequestProperty("Accept-Language", "ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3");
-
+			
 			InputStream in = con.getInputStream();
 			FileOutputStream hout = new FileOutputStream("httpout.xml");
 			int rb = 1;
@@ -66,11 +65,10 @@ public class e1Loader implements ILoadNews{
 			Document Doc;
 			Doc = xmlBulder.parse(xmlFile);
 			NodeList Items = Doc.getElementsByTagName("item");
-//			HttpClient HC = new HttpClient(); 
 			for(int i=0; i<5; i++){
 				NodeList NL = Items.item(i).getChildNodes();
 				News NewsOne = new News();
-				String ref;
+				String ref="";
 				for(int j=0; j<NL.getLength(); j++){
 					Node Item = NL.item(j);
 					String type = Item.getNodeName();
@@ -91,6 +89,10 @@ public class e1Loader implements ILoadNews{
 					out.println(NL.item(j).getTextContent());
 					*/
 				}
+				out.println("ref befor: "+ref);
+				String fullNewsRef = ref.replaceFirst("spool", "print")+".html";
+				out.println("ref after: "+fullNewsRef);
+//				url = new URL("http://www.e1.ru/")
 				
 				Result[i] = NewsOne;
 			}
