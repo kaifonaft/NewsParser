@@ -39,6 +39,7 @@ public class severLoader implements ILoadNews{
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		out.flush();
 		return null;
 	}
 }
