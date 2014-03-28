@@ -5,35 +5,53 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Date;
-import java.util.Scanner;
 import java.io.File;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Element;
-import org.apache.http.client.*;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 
-import sun.net.www.http.HttpClient;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class e1Loader implements ILoadNews{
+	private void loadFullPage(News news, String url){
+		byte[] buf = new byte[128*1024];
+		try{
+			org.jsoup.nodes.Document doc = org.jsoup.Jsoup.connect(url).get();
+			org.jsoup.select.Elements items = doc.select("div");
+			org.jsoup.nodes.Element Text = items.get(3);
+			org.jsoup.nodes.Element Rubric = doc.select("a[href^=/news/spool/section]").get(0);
+			PrintWriter out = new PrintWriter(System.out);
+			
+			news.setFulltext(Text.text());
+			news.setRubric(Rubric.text());
+//			out.println(item.text());
+			out.flush();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
 	public News[] LoadNews() {
 		byte[] buf = new byte[128*1024];
-		News[] Result = new News[5];
+		News[] Result;
+		HttpURLConnection con;
+		URL url;
+		int maxi = 1;
+		Result = new News[maxi];
 		try{
-			boolean notLoad = false;
+			boolean notLoad = true;
 			PrintWriter out = new PrintWriter(System.out);
 		if(!notLoad){
-			URL url = new URL("http://www.e1.ru/news/rdf/full.xml");
-			HttpURLConnection con = (HttpURLConnection)url.openConnection();
+			url = new URL("http://www.e1.ru/news/rdf/full.xml");
+			con = (HttpURLConnection)url.openConnection();
 			con.setRequestMethod("GET");
 			con.setRequestProperty("Host", "www.e1.ru");
 			con.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 5.1; rv:27.0) Gecko/20100101 Firefox/27.0");
@@ -60,12 +78,13 @@ public class e1Loader implements ILoadNews{
 // parse xml(e1.ru)
 			
 			File xmlFile = new File("httpout.xml");
+
 			DocumentBuilderFactory dFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder xmlBulder = dFactory.newDocumentBuilder();
 			Document Doc;
 			Doc = xmlBulder.parse(xmlFile);
 			NodeList Items = Doc.getElementsByTagName("item");
-			for(int i=0; i<5; i++){
+			for(int i=0; i<maxi; i++){
 				NodeList NL = Items.item(i).getChildNodes();
 				News NewsOne = new News();
 				String ref="";
@@ -89,11 +108,9 @@ public class e1Loader implements ILoadNews{
 					out.println(NL.item(j).getTextContent());
 					*/
 				}
-				out.println("ref befor: "+ref);
-				String fullNewsRef = ref.replaceFirst("spool", "print")+".html";
-				out.println("ref after: "+fullNewsRef);
+				String refClear = ref.replaceFirst("spool", "print")+".html";
 //				url = new URL("http://www.e1.ru/")
-				
+				loadFullPage(NewsOne, refClear);
 				Result[i] = NewsOne;
 			}
 			out.flush();

@@ -33,6 +33,9 @@ public class News {
 	public Date getDate(){
 		return date;
 	}
+	public String getRubric(){
+		return rubric;
+	}
 	public void setId(int id){
 		this.id = id;
 	}
@@ -47,6 +50,9 @@ public class News {
 	}
 	public void setDate(Date date){
 		this.date = date;
+	}
+	public void setRubric(String rubric){
+		this.rubric= rubric;
 	}
 	
 /*	void setId(int id){

@@ -18,6 +18,8 @@ public class NewsParcer {
 				out.println("title: "+NewsE1[i].getTitle());
 				out.println("anounce: "+NewsE1[i].getAnounce());
 				out.println("date: "+NewsE1[i].getDate());
+				out.println("fullText: "+NewsE1[i].getFulltext());
+				out.println("rubric: "+NewsE1[i].getRubric());
 				out.println();
 			}
 			BaseNews BN = new BaseNews();
