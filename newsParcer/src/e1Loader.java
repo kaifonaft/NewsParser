@@ -23,18 +23,13 @@ import java.net.URL;
 
 public class e1Loader implements ILoadNews{
 	private void loadFullPage(News news, String url){
-		byte[] buf = new byte[128*1024];
 		try{
 			org.jsoup.nodes.Document doc = org.jsoup.Jsoup.connect(url).get();
 			org.jsoup.select.Elements items = doc.select("div");
 			org.jsoup.nodes.Element Text = items.get(3);
 			org.jsoup.nodes.Element Rubric = doc.select("a[href^=/news/spool/section]").get(0);
-			PrintWriter out = new PrintWriter(System.out);
-			
 			news.setFulltext(Text.text());
 			news.setRubric(Rubric.text());
-//			out.println(item.text());
-			out.flush();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -99,17 +94,9 @@ public class e1Loader implements ILoadNews{
 						NewsOne.setDate(new Date(Item.getTextContent()));
 					}else if(type=="link"){
 						ref = Item.getTextContent();
-					}/*
-					out.print("NodeName: ");
-					out.println(NL.item(j).getNodeName());
-					out.print("NodeValue: ");
-					out.println(NL.item(j).getNodeValue());
-					out.print("TextContent: ");
-					out.println(NL.item(j).getTextContent());
-					*/
+					}
 				}
 				String refClear = ref.replaceFirst("spool", "print")+".html";
-//				url = new URL("http://www.e1.ru/")
 				loadFullPage(NewsOne, refClear);
 				Result[i] = NewsOne;
 			}
