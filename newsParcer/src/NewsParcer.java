@@ -13,10 +13,11 @@ public class NewsParcer {
 		PrintWriter out = new PrintWriter(System.out);
 		ILoadNews LNe1 = new e1Loader();
 		ILoadNews LNsev = new severLoader();
-		ILoadNews LN = LNsev;
+		ILoadNews LN = LNe1;
 		News[] NewsE1 = LN.LoadNews();
 		if(NewsE1!=null){
 			for(int i=0; i<NewsE1.length; i++){
+				out.println("id: "+NewsE1[i].getId());
 				out.println("title: "+NewsE1[i].getTitle());
 				out.println("anounce: "+NewsE1[i].getAnounce());
 				out.println("date: "+NewsE1[i].getDate());

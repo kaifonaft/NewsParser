@@ -96,13 +96,16 @@ public class e1Loader implements ILoadNews{
 						ref = Item.getTextContent();
 					}
 				}
+				int id = Integer.parseInt(ref.substring(36));
+				NewsOne.setId(id);
 				String refClear = ref.replaceFirst("spool", "print")+".html";
 				loadFullPage(NewsOne, refClear);
 				Result[i] = NewsOne;
 			}
 			out.flush();
 //			NL.item(0).;
-//*/			
+//*/		
+			
 		}catch(Exception e){
 			e.printStackTrace();
 		}
