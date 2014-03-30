@@ -96,7 +96,7 @@ public class e1Loader implements ILoadNews{
 						ref = Item.getTextContent();
 					}
 				}
-				int id = Integer.parseInt(ref.substring(36));
+				String id = "e1" + ref.substring(36);
 				NewsOne.setId(id);
 				String refClear = ref.replaceFirst("spool", "print")+".html";
 				loadFullPage(NewsOne, refClear);

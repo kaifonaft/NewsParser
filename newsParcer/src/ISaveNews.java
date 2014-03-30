@@ -1,4 +1,4 @@
 
 public interface ISaveNews {
-	void SaveNews();
+	void SaveNews(News[] news);
 }

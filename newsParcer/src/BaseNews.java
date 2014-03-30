@@ -5,7 +5,7 @@ public class BaseNews implements ILoadNews, ISaveNews{
 	public News[] LoadNews() {
 		return null;
 	}
-	public void SaveNews() {
+	public void SaveNews(News[] news) {
 		// TODO Auto-generated method stub
 	}
 	BaseNews(){

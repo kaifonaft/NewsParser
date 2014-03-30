@@ -17,7 +17,7 @@ public class severLoader implements ILoadNews{
 			Elements items = doc.select("div");
 			Element Text = items.get(0);
 			news.setFulltext(Text.text());
-			news.setRubric("");
+			news.setRubric("sever");
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -43,7 +43,7 @@ public class severLoader implements ILoadNews{
 				String idstr = ref.substring(10);
 //				out.println(idstr);
 //				out.println(idstr.indexOf("-"));
-				int id = Integer.parseInt(idstr.substring(0, idstr.indexOf("-")));
+				String id = "se"+idstr.substring(0, idstr.indexOf("-"));
 				NewsOne.setId(id);
 //				out.println("id: "+id);
 				ref = "http://sever-press.ru"+ref+"?tmpl=component&print=1";

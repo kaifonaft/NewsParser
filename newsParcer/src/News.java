@@ -9,8 +9,8 @@ public class News {
 	private Date date;
 	private String title, anounce, fulltext;
 	private String rubric;
-	private int id;
-	public News(int id, Date d, String title, String anounce, String fulltext){
+	private String id;
+	public News(String id, Date d, String title, String anounce, String fulltext){
 		this.id = id;
 		this.date = d;
 		this.title = title;
@@ -18,7 +18,7 @@ public class News {
 		this.fulltext = fulltext;
 	}
 	public News(){}
-	int getId(){
+	String getId(){
 		return id;
 	}
 	public String getTitle(){
@@ -36,7 +36,7 @@ public class News {
 	public String getRubric(){
 		return rubric;
 	}
-	public void setId(int id){
+	public void setId(String id){
 		this.id = id;
 	}
 	public void setTitle(String title){
