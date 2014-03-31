@@ -87,7 +87,7 @@ public class NewsParcer {
 					continue;
 				}
 				for(int i=0; i<base.size(); i++){
-					if(	par == sdf.format(base.get(i).getDate())){
+					if(	par.equals(sdf.format(base.get(i).getDate()))){
 						out.println(base.get(i).getParAll());
 					}
 				}
@@ -113,19 +113,6 @@ public class NewsParcer {
 				out.println("incorrect query type. input help");
 			}
 			out.flush();
-		}
-		if(news!=null){
-			for(int i=0; i<news.length; i++){
-				out.println("id: "+news[i].getId());
-				out.println("title: "+news[i].getTitle());
-				out.println("anounce: "+news[i].getAnounce());
-				out.println("date: "+news[i].getDate());
-				out.println("fullText: "+news[i].getFulltext());
-				out.println("rubric: "+news[i].getRubric());
-				out.println();
-			}
-//			SN.SaveNews(news);
-//			BaseNews BN = new BaseNews();
 		}
 //		d.setDate(1);
 		out.flush();
