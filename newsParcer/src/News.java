@@ -22,11 +22,11 @@ public class News {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy hh:mm:ss");
 		return 
 			"id: " + this.id + "\n"+
-			"date" + sdf.format(this.date) + "\n"+
-			"title" + this.title + "\n"+
-			"anounce" + this.anounce + "\n"+
-			"date" + this.fulltext + "\n"+
-			"rubric" + this.rubric + "\n";
+			"date: " + sdf.format(this.date) + "\n"+
+			"title: " + this.title + "\n"+
+			"anounce: " + this.anounce + "\n"+
+			"date: " + this.fulltext + "\n"+
+			"rubric: " + this.rubric + "\n";
 	}
 	public News(){}
 	String getId(){

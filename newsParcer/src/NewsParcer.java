@@ -26,7 +26,7 @@ public class NewsParcer {
 		String query = "first query";
 		String type, par;
 		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-		out.println("input command(for example: help)");
+		out.println("input command. for example: help");
 		while(true){
 			out.flush();
 			query = in.nextLine();
@@ -65,20 +65,26 @@ public class NewsParcer {
 				}
 				out.println("loaded");
 			}else if(type.equals("rubric")){
+				boolean newsNotExists = true;
 				for(int i=0; i<base.size(); i++){
 					if(base.get(i).getRubric().equals(par)){
 						out.println(base.get(i).getParAll());
+						newsNotExists = false;
 					}
 				}
+				if(newsNotExists)out.println("news not exists");
 			}else if(type.equals("text")){
+				boolean newsNotExists = true;
 				for(int i=0; i<base.size(); i++){
 					if(	base.get(i).getTitle().indexOf(par) != -1 ||
 						base.get(i).getAnounce().indexOf(par) != -1 ||
 						base.get(i).getFulltext().indexOf(par) != -1)
 					{
 						out.println(base.get(i).getParAll());
+						newsNotExists = false;
 					}
 				}
+				if(newsNotExists)out.println("news not exists");
 			}else if(type.equals("date")){
 				try{
 					sdf.parse(par);
@@ -86,19 +92,23 @@ public class NewsParcer {
 					out.println("incorrect date format. must be dd.MM.yyyy");
 					continue;
 				}
+				boolean newsNotExists = true; 
 				for(int i=0; i<base.size(); i++){
 					if(	par.equals(sdf.format(base.get(i).getDate()))){
 						out.println(base.get(i).getParAll());
+						newsNotExists = false;
 					}
 				}
+				if(newsNotExists)out.println("news not exists");
 			}else if(type.equals("?") || type.equals("help")){
 				out.println("exit, quit - exit close program. all load news will save");
 				out.println("help, ? - show help");
 				out.println("load e - load news from e1.ru");
 				out.println("load s - load news from sever-press.ru");
-				out.println("save - save news");
+				out.println("save - save base");
 				out.println("clear - clear base");
 				out.println("date dd.MM.yyyy - show news from date");
+				out.println("rubric rub - show news from rubric rub");
 				out.println("text str - show news witch contains str");
 			}else if(type.equals("exit") || type.equals("quit")){
 				SN.SaveNews(base.toArray(new News[base.size()]));
@@ -110,7 +120,7 @@ public class NewsParcer {
 				base.clear();
 				out.println("cleared");
 			}else{
-				out.println("incorrect query type. input help");
+				out.println("incorrect command. input help");
 			}
 			out.flush();
 		}
