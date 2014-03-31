@@ -34,10 +34,10 @@ public class severLoader implements ILoadNews{
 			Iterator<Element> it = items.iterator();
 			Element item;
 			Elements trList;
-			NewsOne = new News();
 			String ref;
 			int i=0;
 			while(it.hasNext()){
+				NewsOne = new News();
 				item = it.next().select("h1").get(0);
 				ref = item.select("a").get(0).attr("href");
 				String idstr = ref.substring(10);
@@ -51,12 +51,12 @@ public class severLoader implements ILoadNews{
 
 				trList = it.next().select("tr");
 				String DateString = trList.get(1).text();
-				SimpleDateFormat sdm = new SimpleDateFormat("yyyy.MM.dd hh:mm");
+				SimpleDateFormat sdm = new SimpleDateFormat("dd.MM.yyyy hh:mm");
 				
 				NewsOne.setDate(sdm.parse(DateString));
 				NewsOne.setAnounce(trList.get(2).text());
 //				out.println("title: "+NewsOne.getTitle());
-				out.println("ref: "+ref);
+//				out.println("ref: "+ref);
 //				out.println("anounce: "+NewsOne.getAnounce());
 //				out.println("date: "+NewsOne.getDate());
 				loadFullPage(NewsOne, ref);

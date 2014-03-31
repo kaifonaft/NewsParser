@@ -1,3 +1,4 @@
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import sun.util.resources.CalendarData;
@@ -16,6 +17,16 @@ public class News {
 		this.title = title;
 		this.anounce = anounce;
 		this.fulltext = fulltext;
+	}
+	public String getParAll(){
+		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy hh:mm:ss");
+		return 
+			"id: " + this.id + "\n"+
+			"date" + sdf.format(this.date) + "\n"+
+			"title" + this.title + "\n"+
+			"anounce" + this.anounce + "\n"+
+			"date" + this.fulltext + "\n"+
+			"rubric" + this.rubric + "\n";
 	}
 	public News(){}
 	String getId(){

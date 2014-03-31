@@ -39,10 +39,10 @@ public class e1Loader implements ILoadNews{
 		News[] Result;
 		HttpURLConnection con;
 		URL url;
-		int maxi = 1;
+		int maxi = 10;
 		Result = new News[maxi];
 		try{
-			boolean notLoad = true;
+			boolean notLoad = false;
 			PrintWriter out = new PrintWriter(System.out);
 		if(!notLoad){
 			url = new URL("http://www.e1.ru/news/rdf/full.xml");
@@ -63,7 +63,7 @@ public class e1Loader implements ILoadNews{
 				}
 			}
 //			out.println(new String(buf));
-			out.println("all cool");
+//			out.println("all cool");
 			out.flush();
 			in.close();
 			hout.close();
@@ -86,13 +86,13 @@ public class e1Loader implements ILoadNews{
 				for(int j=0; j<NL.getLength(); j++){
 					Node Item = NL.item(j);
 					String type = Item.getNodeName();
-					if(type=="title"){
+					if(type.equals("title")){
 						NewsOne.setTitle(Item.getTextContent());
-					}else if(type == "description"){
+					}else if(type.equals("description")){
 						NewsOne.setAnounce(Item.getTextContent());
-					}else if(type =="pubDate"){
+					}else if(type.equals("pubDate")){
 						NewsOne.setDate(new Date(Item.getTextContent()));
-					}else if(type=="link"){
+					}else if(type.equals("link")){
 						ref = Item.getTextContent();
 					}
 				}
